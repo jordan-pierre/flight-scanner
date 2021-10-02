@@ -22,14 +22,22 @@ def convert_carriers(id_list, carriers_dict):
     return ', '.join(carrier_list)
 
 
-def main():
-    country = 'US'
-    currency = 'USD'
-    destinationplace = 'anywhere'
-    inboundpartialdate = 'anytime' # The return date. Format “yyyy-mm-dd”, “yyyy-mm” or “anytime”. Use empty string for oneway trip.
-    outboundpartialdate = 'anytime' # The outbound date. Format “yyyy-mm-dd”, “yyyy-mm” or “anytime”.
-    locale = 'en-US'
-    originplace = 'CMH'
+def generate_quotes_csv(country='US', currency='USD', originplace='CMH', destinationplace='anywhere', inboundpartialdate='anytime', outboundpartialdate='anytime', locale='en-US', output_file=''):
+    """Generate airline quotes from origin place to destination place between the outbound and inbound date.
+
+    Args:
+        country (str, optional): Country you're searching from. Defaults to 'US'.
+        currency (str, optional): Currency of prices displayed. Defaults to 'USD'.
+        originplace (str, optional): Origin place. Defaults to 'CMH'.
+        destinationplace (str, optional): Flight destination. Defaults to 'anywhere'.
+        inboundpartialdate (str, optional): The return date. Format “yyyy-mm-dd”, “yyyy-mm” or “anytime”. Use empty string for oneway trip. Defaults to 'anytime'.
+        outboundpartialdate (str, optional): The outbound date. Format “yyyy-mm-dd”, “yyyy-mm” or “anytime”. Defaults to 'anytime'.
+        locale (str, optional): Language locale for results. Defaults to 'en-US'.
+        
+
+    Returns:
+        CSV
+    """
 
     url = f"https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/{country}/{currency}/{locale}/{originplace}/{destinationplace}/{outboundpartialdate}/{inboundpartialdate}"
 
@@ -67,8 +75,10 @@ def main():
 
     latest_scan_df['RunDate'] = datetime.now()
 
-    latest_scan_df.to_csv('output.csv') # to append, pass mode='a', header=False
+    output_file = 'output.csv' if output_file == '' else output_file
+    latest_scan_df.to_csv(output_file) # to append, pass mode='a', header=False
+    print(f"Wrote outputs to {output_file}")
 
 
 if __name__=='__main__':
-    main()
+    generate_quotes_csv()
