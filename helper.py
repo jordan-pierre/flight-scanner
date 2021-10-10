@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import re
+from iata_codes import iata_codes
 
 month_dict = {	
     1:'January',
@@ -53,3 +54,14 @@ def str_date_to_datetime(str_date, months_dict):
         return str_date
 
 
+class InvalidPlaceError(Exception):
+        """Raised when the input value is too large"""
+        pass
+
+
+def validate_place(input):
+    valid_places = iata_codes.add('ANYWHERE')
+    if input.upper() in iata_codes:
+        return True
+    else:
+        raise InvalidPlaceError
