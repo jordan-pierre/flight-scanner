@@ -1,0 +1,2 @@
+,QuoteId,MinPrice,Direct,QuoteDateTime,OutboundLeg.Carriers,InboundLeg.Carriers,OutboundLeg.DepartureDate,InboundLeg.DepartureDate,Name_OutboundOrigin,IataCode_OutboundOrigin,CityName_OutboundOrigin,CountryName_OutboundOrigin,Name_OutboundDestination,IataCode_OutboundDestination,CityName_OutboundDestination,CountryName_OutboundDestination,IataCode_InboundOrigin,IataCode_InboundDestination,RunDate
+0,1,1,0,,,,,,,,,,,,,,,,
